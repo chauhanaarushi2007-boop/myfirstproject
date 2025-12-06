@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Code2 } from "lucide-react";
+import { Menu, CodeXml } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -22,7 +22,7 @@ export function Header() {
       <div className="container flex h-14 items-center">
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <Code2 className="h-6 w-6 text-primary" />
+            <CodeXml className="h-6 w-6 text-primary" />
             <span className="hidden font-bold sm:inline-block font-headline">
               Language-MIA
             </span>
@@ -53,7 +53,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="left" className="pr-0">
               <Link href="/" className="mr-6 flex items-center space-x-2">
-                <Code2 className="h-6 w-6 text-primary" />
+                <CodeXml className="h-6 w-6 text-primary" />
                 <span className="font-bold font-headline">Language-MIA</span>
               </Link>
               <div className="flex flex-col space-y-3 pt-6">
