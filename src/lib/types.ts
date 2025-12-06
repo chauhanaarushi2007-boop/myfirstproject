@@ -26,6 +26,7 @@ export type QuizQuestion = {
 };
 
 export type Quiz = {
+  id: string;
   title: string;
   questions: QuizQuestion[];
 };

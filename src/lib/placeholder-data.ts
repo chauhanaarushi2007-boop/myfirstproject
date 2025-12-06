@@ -1,4 +1,4 @@
-import type { Language, Book } from './types';
+import type { Language, Book, Quiz } from './types';
 
 export const languages: Language[] = [
   { id: 'html', name: 'HTML', description: 'The standard markup language for creating web pages.' },
@@ -63,3 +63,5 @@ export const books: Book[] = [
         language: 'php',
     }
 ]
+
+export { quizData } from './quiz-data';

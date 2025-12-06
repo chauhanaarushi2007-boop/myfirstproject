@@ -1,138 +1,56 @@
-'use client';
+import { languages, quizData } from "@/lib/placeholder-data";
+import { notFound } from "next/navigation";
+import { LanguageIcon } from "@/components/icons/language-icons";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
-import { useState } from 'react';
-import { notFound, useParams } from 'next/navigation';
-import { languages } from '@/lib/placeholder-data';
-import { quizData } from '@/lib/quiz-data';
-import type { QuizQuestion } from '@/lib/types';
-import { LanguageIcon } from '@/components/icons/language-icons';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Label } from '@/components/ui/label';
-import { Progress } from '@/components/ui/progress';
-import { CheckCircle, XCircle, Award, RotateCw } from 'lucide-react';
-import { cn } from '@/lib/utils';
+type Props = {
+    params: { language: string };
+};
 
-export default function LanguageQuizPage() {
-  const params = useParams();
-  const languageId = params.language as keyof typeof quizData;
-  const language = languages.find((lang) => lang.id === languageId);
-  const quiz = quizData[languageId];
+export default function LanguageQuizzesPage({ params }: Props) {
+    const languageId = params.language as keyof typeof quizData;
+    const language = languages.find((lang) => lang.id === languageId);
+    const quizzes = quizData[languageId];
 
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string>>({});
-  const [isFinished, setIsFinished] = useState(false);
-
-  if (!language || !quiz) {
-    notFound();
-  }
-
-  const handleNextQuestion = () => {
-    if (currentQuestionIndex < quiz.questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    } else {
-      setIsFinished(true);
+    if (!language || !quizzes) {
+        notFound();
     }
-  };
-  
-  const handleAnswerSelect = (answer: string) => {
-    setSelectedAnswers({
-      ...selectedAnswers,
-      [currentQuestionIndex]: answer,
-    });
-  };
 
-  const resetQuiz = () => {
-    setCurrentQuestionIndex(0);
-    setSelectedAnswers({});
-    setIsFinished(false);
-  }
-
-  const score = quiz.questions.reduce((acc, question, index) => {
-    return acc + (selectedAnswers[index] === question.correctAnswer ? 1 : 0);
-  }, 0);
-
-  if (isFinished) {
     return (
-      <div className="container py-12">
-        <Card className="max-w-2xl mx-auto">
-          <CardHeader className="text-center">
-            <Award className="w-16 h-16 mx-auto text-yellow-500" />
-            <CardTitle className="font-headline text-3xl mt-4">Quiz Completed!</CardTitle>
-            <CardDescription>You finished the {language.name} quiz.</CardDescription>
-          </CardHeader>
-          <CardContent className="text-center">
-            <p className="text-4xl font-bold mb-2">
-              {score} / {quiz.questions.length}
-            </p>
-            <p className="text-muted-foreground mb-6">Your Score</p>
-            <div className="space-y-4 text-left">
-              {quiz.questions.map((q, i) => (
-                <div key={i} className={cn("p-3 rounded-md border", selectedAnswers[i] === q.correctAnswer ? "border-green-500 bg-green-500/10" : "border-red-500 bg-red-500/10")}>
-                  <p className="font-medium flex items-start gap-2">
-                    {selectedAnswers[i] === q.correctAnswer ? <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" /> : <XCircle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />}
-                    {q.question}
-                  </p>
-                   <p className="text-sm text-muted-foreground pl-7 mt-1">Correct answer: {q.correctAnswer}</p>
-                </div>
-              ))}
+        <div className="container py-12">
+            <header className="mb-12 text-center">
+                <LanguageIcon language={language.id} className="w-24 h-24 mx-auto mb-6 text-primary" />
+                <h1 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl mb-4">
+                    {language.name} Quizzes
+                </h1>
+                <p className="max-w-[700px] mx-auto text-muted-foreground md:text-xl">
+                    Select a quiz to test your knowledge of {language.name}.
+                </p>
+            </header>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {quizzes.map((quiz, index) => (
+                    <Link href={`/quizzes/${language.id}/${quiz.id}`} key={quiz.id} className="group">
+                        <Card className="h-full flex flex-col transition-all duration-300 ease-in-out group-hover:border-primary group-hover:shadow-lg group-hover:-translate-y-1">
+                            <CardHeader>
+                                <CardTitle className="font-headline text-2xl">{quiz.title}</CardTitle>
+                                <CardDescription>10 Questions</CardDescription>
+                            </CardHeader>
+                            <CardContent className="flex-grow">
+                                <p className="text-muted-foreground">Test your understanding of core {language.name} concepts.</p>
+                            </CardContent>
+                             <div className="p-6 pt-0">
+                                <div className="text-sm font-medium text-primary flex items-center gap-1">
+                                    Start Quiz
+                                    <ArrowRight className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" />
+                                </div>
+                            </div>
+                        </Card>
+                    </Link>
+                ))}
             </div>
-
-            <Button onClick={resetQuiz} className="mt-8">
-              <RotateCw className="mr-2 h-4 w-4" />
-              Try Again
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
+        </div>
     );
-  }
-
-  const currentQuestion: QuizQuestion = quiz.questions[currentQuestionIndex];
-  const progress = ((currentQuestionIndex + 1) / quiz.questions.length) * 100;
-
-  return (
-    <div className="container py-12">
-      <header className="mb-8 text-center">
-        <LanguageIcon language={language.id} className="w-16 h-16 mx-auto mb-4 text-primary" />
-        <h1 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">
-          {quiz.title}
-        </h1>
-        <p className="text-muted-foreground mt-2">Question {currentQuestionIndex + 1} of {quiz.questions.length}</p>
-        <Progress value={progress} className="w-full max-w-md mx-auto mt-4" />
-      </header>
-
-      <main>
-        <Card className="max-w-2xl mx-auto">
-          <CardHeader>
-            <CardTitle>
-              {currentQuestion.question}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <RadioGroup
-              onValueChange={handleAnswerSelect}
-              value={selectedAnswers[currentQuestionIndex]}
-              className="space-y-3"
-            >
-              {currentQuestion.options.map((option, index) => (
-                <Label key={index} className="flex items-center space-x-3 p-4 border rounded-md has-[:checked]:border-primary has-[:checked]:bg-primary/5 hover:bg-muted/50 cursor-pointer transition-colors">
-                  <RadioGroupItem value={option} id={`q${currentQuestionIndex}-o${index}`} />
-                  <span>{option}</span>
-                </Label>
-              ))}
-            </RadioGroup>
-            <Button
-              onClick={handleNextQuestion}
-              disabled={!selectedAnswers[currentQuestionIndex]}
-              className="w-full mt-6"
-            >
-              {currentQuestionIndex < quiz.questions.length - 1 ? 'Next Question' : 'Finish Quiz'}
-            </Button>
-          </CardContent>
-        </Card>
-      </main>
-    </div>
-  );
 }
