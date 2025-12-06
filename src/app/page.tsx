@@ -1,3 +1,140 @@
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BookOpen, Bot, ListChecks, Terminal } from "lucide-react";
+import Link from "next/link";
+import { LanguageIcon } from "@/components/icons/language-icons";
+import { languages } from "@/lib/placeholder-data";
+
 export default function Home() {
-  return <></>;
+  return (
+    <div className="flex flex-col min-h-[100dvh]">
+      <section className="w-full py-20 md:py-32 lg:py-40 xl:py-48 bg-card">
+        <div className="container px-4 md:px-6">
+          <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
+            <div className="flex flex-col justify-center space-y-4">
+              <div className="space-y-2">
+                <h1 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                  Master Any Programming Language with CodeLingua
+                </h1>
+                <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                  Your personal AI-powered guide to the world of code. Interactive tutorials, live code execution, and instant answers.
+                </p>
+              </div>
+              <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                  <Link href="/tutorials">
+                    Start Learning Now
+                  </Link>
+                </Button>
+              </div>
+            </div>
+            <div className="hidden lg:flex items-center justify-center relative">
+               <div className="grid grid-cols-4 gap-4">
+                  {languages.slice(0, 8).map((lang, i) => (
+                    <div
+                      key={lang.id}
+                      className="p-4 bg-secondary rounded-full flex items-center justify-center animate-float"
+                      style={{ animationDelay: `${i * 150}ms` }}
+                    >
+                      <LanguageIcon language={lang.id} className="w-10 h-10" />
+                    </div>
+                  ))}
+              </div>
+              <style jsx>{`
+                @keyframes float {
+                  0% { transform: translateY(0px); }
+                  50% { transform: translateY(-10px); }
+                  100% { transform: translateY(0px); }
+                }
+                .animate-float {
+                  animation: float 3s ease-in-out infinite;
+                }
+              `}</style>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" className="w-full py-12 md:py-24 lg:py-32">
+        <div className="container px-4 md:px-6">
+          <div className="flex flex-col items-center justify-center space-y-4 text-center">
+            <div className="space-y-2">
+              <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Key Features</div>
+              <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-5xl">Learn Smarter, Not Harder</h2>
+              <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                CodeLingua provides you with all the tools you need to succeed in your programming journey, from beginner to pro.
+              </p>
+            </div>
+          </div>
+          <div className="mx-auto grid max-w-5xl items-start gap-8 sm:grid-cols-2 md:gap-12 lg:max-w-none lg:grid-cols-4 mt-12">
+            <Card className="hover:shadow-lg transition-shadow duration-300">
+              <CardHeader>
+                <div className="bg-accent/20 text-accent-foreground p-3 rounded-full w-fit mb-4">
+                    <BookOpen className="w-8 h-8 text-primary" />
+                </div>
+                <CardTitle className="font-headline">Comprehensive Tutorials</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">Dive deep into any language with our curated and easy-to-understand tutorials.</p>
+              </CardContent>
+            </Card>
+            <Card className="hover:shadow-lg transition-shadow duration-300">
+              <CardHeader>
+                <div className="bg-accent/20 text-accent-foreground p-3 rounded-full w-fit mb-4">
+                    <ListChecks className="w-8 h-8 text-primary" />
+                </div>
+                <CardTitle className="font-headline">Interactive Quizzes</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">Test your knowledge and solidify your understanding with our interactive quizzes.</p>
+              </CardContent>
+            </Card>
+            <Card className="hover:shadow-lg transition-shadow duration-300">
+              <CardHeader>
+                <div className="bg-accent/20 text-accent-foreground p-3 rounded-full w-fit mb-4">
+                    <Terminal className="w-8 h-8 text-primary" />
+                </div>
+                <CardTitle className="font-headline">Live Code Runner</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">Execute code snippets directly in your browser. No setup required.</p>
+              </CardContent>
+            </Card>
+            <Card className="hover:shadow-lg transition-shadow duration-300">
+              <CardHeader>
+                <div className="bg-accent/20 text-accent-foreground p-3 rounded-full w-fit mb-4">
+                    <Bot className="w-8 h-8 text-primary" />
+                </div>
+                <CardTitle className="font-headline">AI Assistant 'MIA'</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">Get instant help from MIA, your personal AI programming assistant.</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section id="languages" className="w-full py-12 md:py-24 lg:py-32 bg-card">
+        <div className="container px-4 md:px-6">
+          <div className="flex flex-col items-center justify-center space-y-4 text-center">
+            <div className="space-y-2">
+              <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-5xl">Explore Our Languages</h2>
+              <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                From web development to data science, we've got you covered.
+              </p>
+            </div>
+          </div>
+          <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-10">
+            {languages.map((lang) => (
+              <Link key={lang.id} href="/tutorials" className="flex flex-col items-center justify-center space-y-2 group">
+                  <LanguageIcon language={lang.id} className="w-16 h-16 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <span className="text-lg font-medium group-hover:text-primary transition-colors">{lang.name}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }

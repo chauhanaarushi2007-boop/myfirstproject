@@ -1,3 +1,40 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "book-js",
+      "description": "A book cover for a JavaScript book",
+      "imageUrl": "https://images.unsplash.com/photo-1705651317581-0bc22461e2d1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxib29rJTIwamF2YXNjcmlwdHxlbnwwfHx8fDE3NjUwMjYwMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "book javascript"
+    },
+    {
+      "id": "book-python",
+      "description": "A book cover for a Python book",
+      "imageUrl": "https://images.unsplash.com/photo-1758782362630-b3ae94b48eff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxib29rJTIwcHl0aG9ufGVufDB8fHx8MTc2NTAyNjAzMXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "book python"
+    },
+    {
+      "id": "book-java",
+      "description": "A book cover for a Java book",
+      "imageUrl": "https://images.unsplash.com/photo-1763098844932-7240ee8ff180?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxib29rJTIwamF2YXxlbnwwfHx8fDE3NjUwMjYwMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "book java"
+    },
+    {
+      "id": "book-cpp",
+      "description": "A book cover for a C++ book",
+      "imageUrl": "https://images.unsplash.com/photo-1534665482403-a909d0d97c67?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxib29rJTIwY29kZXxlbnwwfHx8fDE3NjUwMjYwMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "book code"
+    },
+    {
+      "id": "book-html-css",
+      "description": "A book cover for an HTML and CSS book",
+      "imageUrl": "https://images.unsplash.com/photo-1535954741680-a2e24eb05418?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxib29rJTIwZGVzaWdufGVufDB8fHx8MTc2NTAyNjAzMXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "book design"
+    },
+    {
+      "id": "book-php",
+      "description": "A book cover for a PHP book",
+      "imageUrl": "https://images.unsplash.com/photo-1715924478354-eeab44896fa8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxib29rJTIwc2VydmVyfGVufDB8fHx8MTc2NTAyNjAzMXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "book server"
+    }
+  ]
 }
