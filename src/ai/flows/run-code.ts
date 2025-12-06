@@ -30,24 +30,33 @@ const prompt = ai.definePrompt({
   name: 'runCodePrompt',
   input: {schema: RunCodeInputSchema},
   output: {schema: RunCodeOutputSchema},
-  prompt: `You are a code execution engine. You will be given a code snippet, its programming language, and optional user input.
-Your task is to determine the output of the code when it is executed.
+  prompt: `You are a code execution engine. Your task is to execute a given code snippet and return its output.
 
-If the language is 'php', 'html', or 'css', you must act as a web server.
-This means if the code is PHP, you will execute it. If the code is HTML or CSS, you will render it. The code may contain a mix of HTML, CSS, and JavaScript. Your output should be the final rendered HTML that a browser would receive after the code has been processed. Do not output anything other than the final HTML.
+Follow these rules precisely:
 
-For all other languages, execute the code. If user input is provided, use it as the standard input (stdin) for the program. Return only the text output that would be printed to the console or terminal.
+1.  **Rendering vs. Executing**:
+    *   If the language is 'php', 'html', or 'css', act as a web server. The code may be a mix of these. Your output MUST be only the final rendered HTML that a browser would display.
+    *   For all other languages, you will act as a command-line execution environment.
 
-Do not provide any surrounding text, explanations, or markdown formatting like \`\`\`.
+2.  **Handling Input**:
+    *   If user input is provided, you MUST use it as the standard input (stdin) for the program. The program will read from this input.
+    *   If no user input is provided, execute the code as is.
 
-Language: {{{language}}}
+3.  **Output Format**:
+    *   For executed code (non-web), return ONLY the raw text that would be printed to the console/terminal.
+    *   Do NOT provide any explanations, notes, or markdown formatting like \`\`\`. Your response must be only the code's direct output.
+
+---
+**Language**: {{{language}}}
+
 {{#if input}}
-User Input:
+**User Input (stdin)**:
 '''
 {{{input}}}
 '''
 {{/if}}
-Code:
+
+**Code to Execute**:
 '''
 {{{code}}}
 '''
