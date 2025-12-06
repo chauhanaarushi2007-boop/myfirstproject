@@ -18,3 +18,14 @@ export interface ChatMessage {
   role: 'user' | 'assistant';
   message: string;
 }
+
+export type QuizQuestion = {
+  question: string;
+  options: string[];
+  correctAnswer: string;
+};
+
+export type Quiz = {
+  title: string;
+  questions: QuizQuestion[];
+};
