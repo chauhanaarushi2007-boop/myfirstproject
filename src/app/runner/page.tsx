@@ -11,8 +11,8 @@ import { runCode } from "@/app/actions";
 
 export default function CodeRunnerPage() {
     const [output, setOutput] = useState("Your code output will appear here.");
-    const [code, setCode] = useState("console.log('Hello, Language-MIA!');");
-    const [language, setLanguage] = useState("javascript");
+    const [code, setCode] = useState("<h1>Hello, Language-MIA!</h1>\n<style>\n  h1 { color: blue; }\n</style>");
+    const [language, setLanguage] = useState("html");
     const [isPending, startTransition] = useTransition();
 
     const handleRunCode = () => {
@@ -22,6 +22,8 @@ export default function CodeRunnerPage() {
             setOutput(result.output);
         });
     }
+
+    const shouldRenderHtml = ['html', 'css', 'php'].includes(language);
 
   return (
     <div className="container py-12">
@@ -71,8 +73,17 @@ export default function CodeRunnerPage() {
                     <CardHeader>
                         <CardTitle className="text-lg font-medium">Output</CardTitle>
                     </CardHeader>
-                    <CardContent>
-                        <pre className="font-code text-sm text-muted-foreground whitespace-pre-wrap">{output}</pre>
+                    <CardContent className="h-full p-0">
+                        {shouldRenderHtml ? (
+                            <iframe
+                                srcDoc={output}
+                                title="Code Output"
+                                sandbox="allow-scripts"
+                                className="w-full h-full border-0"
+                            />
+                        ) : (
+                            <pre className="font-code text-sm text-muted-foreground whitespace-pre-wrap p-6 pt-0">{output}</pre>
+                        )}
                     </CardContent>
                 </Card>
             </div>
