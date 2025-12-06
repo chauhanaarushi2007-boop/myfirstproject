@@ -1,3 +1,4 @@
+
 import type { Language, Quiz } from './types';
 
 // To keep placeholder-data.ts clean, quiz data has been moved here.
@@ -70,7 +71,7 @@ export const quizData: Record<Language['id'], Quiz[]> = {
         { question: "Which method can be used to return a string in upper case letters?", options: ["upper()", "toUpperCase()", "uppercase()", "toUpper()"], correctAnswer: "upper()" },
         { question: "Which collection does not allow duplicate members?", options: ["List", "Tuple", "Set", "Dictionary"], correctAnswer: "Set" },
         { question: "How do you start writing an `if` statement in Python?", options: ["if x > y then:", "if (x > y)", "if x > y:", "if x > y"], correctAnswer: "if x > y:" },
-        { question: "What is the purpose of the `pass` statement?", options: ["To skip the current iteration of a loop", "To exit a function", "To act as a placeholder for future code", "To raise an exception"], correctAnswer: "To act as aplaceholder for future code" },
+        { question: "What is the purpose of the `pass` statement?", options: ["To skip the current iteration of a loop", "To exit a function", "To act as a placeholder for future code", "To raise an exception"], correctAnswer: "To act as a placeholder for future code" },
         { question: "Which keyword is used to create a function?", options: ["function", "def", "create", "fun"], correctAnswer: "def" },
         { question: "What does the `len()` function do?", options: ["Returns the number of items in an object", "Returns the largest value", "Converts to lowercase", "Calculates the logarithm"], correctAnswer: "Returns the number of items in an object" },
     ]
@@ -172,3 +173,5 @@ export const quizData: Record<Language['id'], Quiz[]> = {
     ]
   })),
 };
+
+    
