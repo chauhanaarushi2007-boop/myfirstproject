@@ -26,6 +26,7 @@ export default function CodeRunnerPage() {
     }
 
     const shouldRenderHtml = ['html', 'css', 'php'].includes(language);
+    const availableLanguages = languages.filter(lang => lang.id !== 'c');
 
   return (
     <div className="container py-12">
@@ -50,7 +51,7 @@ export default function CodeRunnerPage() {
                         <SelectValue placeholder="Select Language" />
                     </SelectTrigger>
                     <SelectContent>
-                        {languages.map(lang => (
+                        {availableLanguages.map(lang => (
                              <SelectItem key={lang.id} value={lang.id}>{lang.name}</SelectItem>
                         ))}
                     </SelectContent>
