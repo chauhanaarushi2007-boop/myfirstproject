@@ -1,4 +1,4 @@
-import type { Language, Book, Quiz } from './types';
+import type { Language, Book, Quiz, WebsiteReference } from './types';
 
 export const languages: Language[] = [
   { id: 'html', name: 'HTML', description: 'The standard markup language for creating web pages.' },
@@ -63,5 +63,44 @@ export const books: Book[] = [
         language: 'php',
     }
 ]
+
+export const websites: WebsiteReference[] = [
+  {
+    id: 'geeksforgeeks',
+    name: 'GeeksforGeeks',
+    url: 'https://www.geeksforgeeks.org/',
+    description: 'A comprehensive resource for programming, algorithms, data structures, and computer science subjects.',
+    icon: 'BrainCircuit',
+  },
+  {
+    id: 'stackoverflow',
+    name: 'Stack Overflow',
+    url: 'https://stackoverflow.com/',
+    description: 'The largest online community for developers to learn, share their knowledge, and build their careers.',
+    icon: 'Network',
+  },
+  {
+    id: 'freecodecamp',
+    name: 'freeCodeCamp',
+    url: 'https://www.freecodecamp.org/',
+    description: 'A non-profit organization that consists of an interactive learning web platform and online community.',
+    icon: 'Code',
+  },
+  {
+    id: 'mdn-web-docs',
+    name: 'MDN Web Docs',
+    url: 'https://developer.mozilla.org/',
+    description: 'A valuable resource for developers, maintained by Mozilla, providing in-depth documentation for web technologies.',
+    icon: 'BookOpen',
+  },
+  {
+    id: 'w3schools',
+    name: 'W3Schools',
+    url: 'https://www.w3schools.com/',
+    description: 'A popular web developers site, with tutorials and references on web development languages.',
+    icon: 'School',
+  },
+];
+
 
 export { quizData } from './quiz-data';

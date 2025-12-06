@@ -30,3 +30,11 @@ export type Quiz = {
   title: string;
   questions: QuizQuestion[];
 };
+
+export type WebsiteReference = {
+  id: string;
+  name: string;
+  url: string;
+  description: string;
+  icon: 'BrainCircuit' | 'Network' | 'Code' | 'BookOpen' | 'School';
+};
