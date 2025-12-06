@@ -26,7 +26,7 @@ export default function CodeRunnerPage() {
     }
 
     const shouldRenderHtml = ['html', 'css', 'php'].includes(language);
-    const availableLanguages = languages.filter(lang => lang.id !== 'c');
+    const availableLanguages = languages;
 
   return (
     <div className="container py-12">
