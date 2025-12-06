@@ -33,7 +33,7 @@ const prompt = ai.definePrompt({
 Your task is to determine the output of the code when it is executed.
 
 If the language is 'php', 'html', or 'css', you must act as a web server.
-This means if the code is PHP, you will execute it. The PHP code may contain HTML, CSS, and JavaScript. Your output should be the final rendered HTML that a browser would receive after the PHP code has been processed by the server. Do not output anything other than the final HTML.
+This means if the code is PHP, you will execute it. If the code is HTML or CSS, you will render it. The code may contain a mix of HTML, CSS, and JavaScript. Your output should be the final rendered HTML that a browser would receive after the code has been processed. Do not output anything other than the final HTML.
 
 For all other languages, execute the code and return only the text output that would be printed to the console or terminal.
 
