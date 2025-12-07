@@ -1,51 +1,32 @@
-"use server";
+"use server"; // This defines it as a Server Action
 
-import { programmingLanguageQuery } from "@/ai/flows/chatbot-programming-language-query";
-import { runCode as runCodeFlow } from "@/ai/flows/run-code";
-import { headers } from "next/headers";
+// 1. Import Google AI SDK
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export async function askMIA(query: string) {
-    if (!query || query.trim().length === 0) {
-        return {
-            answer: "Please enter a question.",
-            error: true
-        };
+  try {
+    // 2. Load the API Key safely from the environment
+    const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
+
+    if (!apiKey) {
+      return { answer: "Error: API Key is missing." };
     }
 
-    try {
-        const result = await programmingLanguageQuery({ query });
-        return {
-            answer: result.answer,
-            error: false
-        };
-    } catch (e) {
-        console.error(e);
-        return {
-            answer: "Sorry, I couldn't process your request right now. Please try again.",
-            error: true
-        };
-    }
-}
+    // 3. Initialize Google AI
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" }); // or "gemini-1.5-flash"
 
-export async function runCode(code: string, language: string, input: string) {
-    if (!code || code.trim().length === 0) {
-        return {
-            output: "Please enter some code to run.",
-            error: true
-        };
-    }
+    // 4. Generate content
+    const result = await model.generateContent(query);
+    const response = await result.response;
+    const text = response.text();
 
-    try {
-        const result = await runCodeFlow({ code, language, input });
-        return {
-            output: result.output,
-            error: false
-        };
-    } catch (e) {
-        console.error(e);
-        return {
-            output: "Sorry, I couldn't run your code right now. Please try again.",
-            error: true
-        };
-    }
+    // 5. Return the text in the format your frontend expects
+    // Your frontend expects an object with an "answer" property (based on line 44 of your screenshot)
+    return { answer: text };
+
+  } catch (error) {
+    console.error("AI Error:", error);
+    return { answer: "Sorry, I am having trouble connecting to the server right now." };
+  }
 }
